@@ -1,0 +1,9 @@
+<!doctype html>
+{% include 'header.html'%}
+
+<div class="textbox">
+    {% for caption, href in myprojects() %}
+    <a href="{{ href }}" class="menuitem">[{{ caption }}]</a><br>
+    {% endfor %}
+</div>
+{% include 'footer.html'%}

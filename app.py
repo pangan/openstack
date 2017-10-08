@@ -11,6 +11,8 @@ from functools import wraps
 app = Flask(__name__)
 CONFIG_FOLDER = os.path.dirname(os.path.realpath(__file__))
 
+
+
 def check_auth(username, password):
     logins = dict()
 
@@ -74,6 +76,39 @@ def admin():
 def contact():
     return render_template('contact.html')
 
+
+@app.route('/projects')
+def projects():
+    return render_template('projects.html')
+
+
+def menuitems():
+    mainmenu = [
+        ('About me', '/'),
+        ('Contact', 'contact'),
+        ('Art Gallery', 'https://pangan46.wixsite.com/portfolio'),
+        ('Publishes', '/'),
+        ('Library', '/'),
+        ('Projects', '/projects'),
+        ('My git', 'http://github.com/pangan'),
+        ('My Wiki', 'http://wiki.mofakhar.info'),
+        ('Private Area', 'admin'),
+        ('Logout', 'logout')
+    ]
+    return mainmenu
+
+
+def myprojects():
+    mainmenu = [
+        ('Camera', 'http://www.mofakhar.info/webcam/index.php'),
+        ('Mobile Network', 'http://www.mofakhar.info/index.php?p=5'),
+        ('xproject-api', 'http://xproject.mofakhar.info'),
+    ]
+    return mainmenu
+
+
+
+app.jinja_env.globals.update(menuitems=menuitems, myprojects=myprojects)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
